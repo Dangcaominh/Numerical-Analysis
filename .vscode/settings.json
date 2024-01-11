@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "iomanip": "cpp",
+    },
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -std=c++17 *.cpp  -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    }
+}
