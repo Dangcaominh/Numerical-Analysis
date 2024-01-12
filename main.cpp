@@ -17,7 +17,8 @@ class function
         function();
         NODISCARD long double operator()(long double x);
         friend std::istream &operator>>(std::istream &is, function& f);
-        NODISCARD long double bisect(double a, double b, ull N);
+        NODISCARD long double bisect(long double a, long double b, ull N);
+        NODISCARD long double iterate(long double x, long double eps = 0.000001, ull N = 100);
 };
 
 function::function()
@@ -62,9 +63,16 @@ std::istream &operator>>(std::istream &is, function& func)
     return is;
 }
 
-long double function::bisect(double a, double b, ull N)
+long double function::bisect(long double a, long double b, ull N)
 {
-    
+    if((*this)(a) == 0)
+    {
+        return a;
+    }
+    if((*this)(b) == 0)
+    {
+        return b;
+    }
     long double result = (a + b) / 2;
     while(N--)
     {
@@ -86,12 +94,28 @@ long double function::bisect(double a, double b, ull N)
     return result;
 }
 
+long double function::iterate(long double x, long double eps, ull N)
+{
+
+    long double err = eps + 1;
+    while((N--) && abs(err) > eps)
+    {
+        long double y = (*this)(x);
+        err = abs(y - x);
+        x = y;
+    }
+    return x;
+}
+
 int main()
 {
     cout << setprecision(10);
     function f;
     cout << "f(x) = ";
     cin >> f;
-    cout << f.bisect(0, 1, 100) << "\n";
+    cout << "Nhap gia tri ban dau x = ";
+    long double x;
+    cin >> x;
+    cout << f.iterate(x, 0.0001) << "\n";
     return 0;
 }
