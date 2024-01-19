@@ -58,7 +58,8 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.inc": "cpp"
     },
     "code-runner.executorMap": {
         "cpp": "cd $dir && g++ -std=c++17 *.cpp  -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
